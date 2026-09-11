@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rapportage Templategenerator</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Rapportage Templategenerator</h1>
+    <p>Kies een rol, kies een template en vul de rapportage in.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <!-- gevuld via app.js -->
+    </aside>
+
+    <main class="content">
+      <div id="leegState" class="leeg-state">
+        <p>Selecteer links een template om te beginnen.</p>
+      </div>
+
+      <div id="templateWeergave" class="template-weergave" hidden>
+        <div class="template-header">
+          <h2 id="templateTitel"></h2>
+          <p id="templateBeschrijving"></p>
+        </div>
+
+        <div class="werkgebied">
+          <section class="formulier-paneel">
+            <h3>Gegevens invullen</h3>
+            <form id="rapportageForm"></form>
+          </section>
+
+          <section class="preview-paneel">
+            <div class="preview-acties">
+              <h3>Voorbeeld</h3>
+              <div class="acties">
+                <button type="button" id="kopieerBtn">Kopieer als Markdown</button>
+                <button type="button" id="downloadBtn">Download .md</button>
+                <button type="button" id="printBtn">Print / PDF</button>
+              </div>
+            </div>
+            <div id="previewInhoud" class="preview-inhoud"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="templates.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
