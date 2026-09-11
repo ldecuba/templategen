@@ -1,23 +1,74 @@
 :root {
-  --kleur-primair: #1f4b99;
-  --kleur-primair-hover: #163a78;
-  --kleur-rand: #d8dee6;
-  --kleur-achtergrond: #f5f7fa;
-  --kleur-tekst: #1c2530;
-  --kleur-muted: #5b6673;
+  color-scheme: light;
+  --surface-1: #fcfcfb;
+  --surface-2: #ffffff;
+  --page-plane: #f5f7fa;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --border: #d8dee6;
+  --gridline: #e1e0d9;
+  --accent: #2a78d6;
+  --accent-hover: #1c5cab;
+  --accent-wash: #e7edf9;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --neutral-badge: #898781;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --surface-2: #222221;
+    --page-plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --border: #383835;
+    --gridline: #2c2c2a;
+    --accent: #3987e5;
+    --accent-hover: #5598e7;
+    --accent-wash: #24314a;
+    --good: #0ca30c;
+    --warning: #fab219;
+    --serious: #ec835a;
+    --critical: #e66767;
+    --neutral-badge: #898781;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-1: #1a1a19;
+  --surface-2: #222221;
+  --page-plane: #0d0d0d;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --border: #383835;
+  --gridline: #2c2c2a;
+  --accent: #3987e5;
+  --accent-hover: #5598e7;
+  --accent-wash: #24314a;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #e66767;
+  --neutral-badge: #898781;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--kleur-achtergrond);
-  color: var(--kleur-tekst);
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  background: var(--page-plane);
+  color: var(--text-primary);
 }
 
 .topbar {
-  background: var(--kleur-primair);
+  background: var(--accent);
   color: white;
   padding: 20px 28px;
 }
@@ -31,8 +82,8 @@ body {
 
 .sidebar {
   width: 280px;
-  background: white;
-  border-right: 1px solid var(--kleur-rand);
+  background: var(--surface-2);
+  border-right: 1px solid var(--border);
   padding: 16px;
   overflow-y: auto;
 }
@@ -42,7 +93,7 @@ body {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--kleur-muted);
+  color: var(--text-muted);
   margin: 0 0 8px 4px;
 }
 
@@ -57,34 +108,34 @@ body {
   margin-bottom: 6px;
   cursor: pointer;
   font-size: 14px;
-  color: var(--kleur-tekst);
+  color: var(--text-primary);
 }
-.template-knop:hover { background: #eef2f8; }
+.template-knop:hover { background: var(--accent-wash); }
 .template-knop.actief {
-  background: #e7edf9;
-  border-color: var(--kleur-primair);
+  background: var(--accent-wash);
+  border-color: var(--accent);
   font-weight: 600;
-  color: var(--kleur-primair);
+  color: var(--accent);
 }
 .template-knop .sub {
   display: block;
   font-weight: 400;
   font-size: 12px;
-  color: var(--kleur-muted);
+  color: var(--text-muted);
   margin-top: 2px;
 }
 
 .content { flex: 1; padding: 24px; overflow-y: auto; }
 
 .leeg-state {
-  color: var(--kleur-muted);
+  color: var(--text-muted);
   padding: 60px 20px;
   text-align: center;
   font-size: 15px;
 }
 
 .template-header h2 { margin: 0 0 4px 0; }
-.template-header p { margin: 0 0 20px 0; color: var(--kleur-muted); }
+.template-header p { margin: 0 0 20px 0; color: var(--text-muted); }
 
 .werkgebied {
   display: flex;
@@ -93,8 +144,8 @@ body {
 }
 
 .formulier-paneel, .preview-paneel {
-  background: white;
-  border: 1px solid var(--kleur-rand);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 18px;
   flex: 1;
@@ -116,35 +167,37 @@ body {
 .veld textarea {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid var(--kleur-rand);
+  border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 14px;
   font-family: inherit;
+  background: var(--surface-1);
+  color: var(--text-primary);
 }
 .veld textarea { min-height: 80px; resize: vertical; }
-.veld .hint { font-size: 12px; color: var(--kleur-muted); margin-top: 3px; }
+.veld .hint { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
 
 .tabel-veld table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-.tabel-veld th, .tabel-veld td { border: 1px solid var(--kleur-rand); padding: 4px; }
-.tabel-veld th { background: #f0f3f7; font-size: 12px; }
-.tabel-veld input { border: none; width: 100%; padding: 4px; font-size: 13px; }
-.tabel-veld input:focus { outline: 1px solid var(--kleur-primair); }
+.tabel-veld th, .tabel-veld td { border: 1px solid var(--border); padding: 4px; }
+.tabel-veld th { background: var(--accent-wash); font-size: 12px; }
+.tabel-veld input { border: none; width: 100%; padding: 4px; font-size: 13px; background: transparent; color: var(--text-primary); }
+.tabel-veld input:focus { outline: 1px solid var(--accent); }
 .tabel-rij-acties { text-align: center; }
 .tabel-rij-acties button {
   background: transparent;
   border: none;
-  color: #b3261e;
+  color: var(--critical);
   cursor: pointer;
   font-size: 13px;
 }
 .tabel-toevoegen {
   background: transparent;
-  border: 1px dashed var(--kleur-rand);
+  border: 1px dashed var(--border);
   border-radius: 6px;
   padding: 6px 10px;
   cursor: pointer;
   font-size: 13px;
-  color: var(--kleur-primair);
+  color: var(--accent);
 }
 
 .preview-acties {
@@ -155,7 +208,7 @@ body {
   gap: 8px;
 }
 .acties button {
-  background: var(--kleur-primair);
+  background: var(--accent);
   color: white;
   border: none;
   padding: 7px 12px;
@@ -164,27 +217,146 @@ body {
   cursor: pointer;
   margin-left: 6px;
 }
-.acties button:hover { background: var(--kleur-primair-hover); }
-.acties button.secundair { background: white; color: var(--kleur-primair); border: 1px solid var(--kleur-primair); }
-.acties button.secundair:hover { background: #eef2f8; }
+.acties button:hover { background: var(--accent-hover); }
+.acties button.secundair { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.acties button.secundair:hover { background: var(--accent-wash); }
 
 .preview-inhoud {
-  border: 1px solid var(--kleur-rand);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px 20px;
-  background: #fcfdfe;
-  max-height: 75vh;
+  background: var(--surface-1);
+  max-height: 78vh;
   overflow-y: auto;
 }
 .preview-inhoud h1 { font-size: 20px; }
-.preview-inhoud h2 { font-size: 16px; margin-top: 22px; border-bottom: 1px solid var(--kleur-rand); padding-bottom: 4px; }
+.preview-inhoud h2 { font-size: 16px; margin-top: 22px; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
 .preview-inhoud table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
-.preview-inhoud th, .preview-inhoud td { border: 1px solid var(--kleur-rand); padding: 6px 8px; text-align: left; }
-.preview-inhoud th { background: #f0f3f7; }
+.preview-inhoud th, .preview-inhoud td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; }
+.preview-inhoud th { background: var(--accent-wash); }
+
+/* ---------------------------------------------------------------------
+   Dashboardcomponenten (KPI-tegels, badges, statusbalk)
+   --------------------------------------------------------------------- */
+
+.dashboard {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tegel-rij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.stat-tegel {
+  flex: 1 1 140px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.stat-tegel .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+.stat-tegel .stat-waarde {
+  font-size: 26px;
+  font-weight: 700;
+  font-variant-numeric: proportional-nums;
+  line-height: 1.1;
+}
+.stat-tegel.klasse-goed .stat-waarde { color: var(--good); }
+.stat-tegel.klasse-waarschuwing .stat-waarde { color: var(--warning); }
+.stat-tegel.klasse-ernstig .stat-waarde { color: var(--serious); }
+.stat-tegel.klasse-kritiek .stat-waarde { color: var(--critical); }
+
+.badge-rij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.badge .badge-icoon { font-size: 12px; line-height: 1; }
+.badge.klasse-goed { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+.badge.klasse-waarschuwing { color: #8a6400; background: color-mix(in srgb, var(--warning) 22%, transparent); border-color: color-mix(in srgb, var(--warning) 45%, transparent); }
+.badge.klasse-ernstig { color: var(--serious); background: color-mix(in srgb, var(--serious) 18%, transparent); border-color: color-mix(in srgb, var(--serious) 40%, transparent); }
+.badge.klasse-kritiek { color: var(--critical); background: color-mix(in srgb, var(--critical) 16%, transparent); border-color: color-mix(in srgb, var(--critical) 40%, transparent); }
+.badge.klasse-neutraal { color: var(--text-secondary); background: color-mix(in srgb, var(--neutral-badge) 16%, transparent); border-color: var(--border); }
+
+.statusbalk-blok { margin-bottom: 14px; }
+.statusbalk-titel { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+.statusbalk {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--gridline);
+  margin-bottom: 6px;
+}
+.statusbalk-segment { height: 100%; }
+.statusbalk-segment.klasse-goed { background: var(--good); }
+.statusbalk-segment.klasse-waarschuwing { background: var(--warning); }
+.statusbalk-segment.klasse-ernstig { background: var(--serious); }
+.statusbalk-segment.klasse-kritiek { background: var(--critical); }
+.statusbalk-segment.klasse-neutraal { background: var(--neutral-badge); }
+.statusbalk-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.statusbalk-legenda .legenda-item { display: inline-flex; align-items: center; gap: 5px; }
+.statusbalk-legenda .legenda-stip { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.statusbalk-legenda .legenda-stip.klasse-goed { background: var(--good); }
+.statusbalk-legenda .legenda-stip.klasse-waarschuwing { background: var(--warning); }
+.statusbalk-legenda .legenda-stip.klasse-ernstig { background: var(--serious); }
+.statusbalk-legenda .legenda-stip.klasse-kritiek { background: var(--critical); }
+.statusbalk-legenda .legenda-stip.klasse-neutraal { background: var(--neutral-badge); }
+
+.donut-rij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.donut-item { display: flex; flex-direction: column; align-items: center; width: 88px; }
+.donut-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.25;
+}
+
+.dashboard-sectietitel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin: 4px 0 8px;
+}
 
 @media (max-width: 900px) {
   .layout { flex-direction: column; }
-  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--kleur-rand); }
+  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
   .werkgebied { flex-direction: column; }
 }
 
