@@ -165,6 +165,8 @@ body {
   margin-left: 6px;
 }
 .acties button:hover { background: var(--kleur-primair-hover); }
+.acties button.secundair { background: white; color: var(--kleur-primair); border: 1px solid var(--kleur-primair); }
+.acties button.secundair:hover { background: #eef2f8; }
 
 .preview-inhoud {
   border: 1px solid var(--kleur-rand);

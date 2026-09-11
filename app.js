@@ -60,12 +60,13 @@ function bouwFormulier() {
     wrapper.appendChild(label);
 
     if (veld.type === "table") {
-      huidigeData[veld.key] = [{ ...veld.placeholderRij }];
+      if (!huidigeData[veld.key]) huidigeData[veld.key] = [{ ...veld.placeholderRij }];
       wrapper.classList.add("tabel-veld");
       wrapper.appendChild(bouwTabelVeld(veld));
     } else if (veld.type === "textarea") {
       const el = document.createElement("textarea");
       el.placeholder = veld.placeholder || "";
+      el.value = huidigeData[veld.key] || "";
       el.addEventListener("input", () => { huidigeData[veld.key] = el.value; ververPreview(); });
       wrapper.appendChild(el);
     } else if (veld.type === "select") {
@@ -80,12 +81,14 @@ function bouwFormulier() {
         opt.textContent = optie;
         el.appendChild(opt);
       });
+      el.value = huidigeData[veld.key] || "";
       el.addEventListener("change", () => { huidigeData[veld.key] = el.value; ververPreview(); });
       wrapper.appendChild(el);
     } else {
       const el = document.createElement("input");
       el.type = veld.type === "date" ? "date" : "text";
       el.placeholder = veld.placeholder || "";
+      el.value = huidigeData[veld.key] || "";
       el.addEventListener("input", () => { huidigeData[veld.key] = el.value; ververPreview(); });
       wrapper.appendChild(el);
     }
@@ -212,6 +215,18 @@ function markdownNaarHtml(markdown) {
   return html;
 }
 
+function laadVoorbeeld() {
+  if (!huidigTemplate || !huidigTemplate.voorbeeld) return;
+  huidigeData = JSON.parse(JSON.stringify(huidigTemplate.voorbeeld));
+  huidigTemplate.velden.forEach((veld) => {
+    if (veld.type === "table" && !huidigeData[veld.key]) {
+      huidigeData[veld.key] = [{ ...veld.placeholderRij }];
+    }
+  });
+  bouwFormulier();
+  ververPreview();
+}
+
 function kopieerMarkdown() {
   if (!huidigTemplate) return;
   navigator.clipboard.writeText(huidigTemplate.laatsteMarkdown).then(() => {
@@ -230,6 +245,7 @@ function downloadMarkdown() {
   URL.revokeObjectURL(url);
 }
 
+document.getElementById("voorbeeldBtn").addEventListener("click", laadVoorbeeld);
 document.getElementById("kopieerBtn").addEventListener("click", kopieerMarkdown);
 document.getElementById("downloadBtn").addEventListener("click", downloadMarkdown);
 document.getElementById("printBtn").addEventListener("click", () => window.print());

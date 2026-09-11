@@ -69,6 +69,27 @@ const TEMPLATES = [
       { key: "verbeterpunten", label: "Verbeterpunten / actiepunten", type: "textarea", placeholder: "Één per regel." },
       { key: "conclusie", label: "Conclusie en vooruitblik", type: "textarea", placeholder: "Conclusie over de periode en aandachtspunten voor de volgende periode." },
     ],
+    voorbeeld: {
+      opdrachtgever: "Gemeente Utrecht",
+      leverancier: "Acme IT Services B.V.",
+      contractnaam: "Beheer & onderhoud applicatielandschap",
+      periode: "Q3 2026 (juli - september)",
+      opsteller: "Linda de Cuba",
+      datum: "2026-09-30",
+      samenvatting: "De dienstverlening voldeed dit kwartaal grotendeels aan de afgesproken SLA-normen. Beschikbaarheid en reactietijden lagen boven norm; één ernstig incident zorgde kortstondig voor overschrijding van de oplostijd.",
+      kpis: [
+        { naam: "Beschikbaarheid productieomgeving", norm: "99,5%", gerealiseerd: "99,7%", status: "Voldaan" },
+        { naam: "Reactietijd prioriteit 1", norm: "< 1 uur", gerealiseerd: "42 minuten", status: "Voldaan" },
+        { naam: "Oplostijd prioriteit 2", norm: "< 8 uur", gerealiseerd: "9,5 uur", status: "Niet voldaan" },
+      ],
+      incidenten: [
+        { datum: "12-08-2026", omschrijving: "Storing betaalmodule", impact: "Hoog", oplostijd: "3u 40m", status: "Opgelost" },
+        { datum: "03-09-2026", omschrijving: "Vertraagde dataverwerking rapportages", impact: "Gemiddeld", oplostijd: "9u 30m", status: "Opgelost" },
+      ],
+      afwijkingen: "De oplostijd voor prioriteit 2-incidenten is één keer overschreden door een onderbezette supportdesk tijdens de zomerperiode. Leverancier heeft extra capaciteit ingepland voor Q4.",
+      verbeterpunten: "Extra bezetting supportdesk tijdens vakantieperiodes\nMaandelijkse trendanalyse van incidenten toevoegen aan rapportage\nEvaluatie escalatieprocedure met leverancier",
+      conclusie: "De dienstverlening is over het geheel genomen stabiel. Aandachtspunt voor Q4 is het structureel borgen van de oplostijdnorm bij piekbelasting.",
+    },
     render(d) {
       return `# SLA-rapportage — ${d.contractnaam || "[contract]"}
 
@@ -164,6 +185,23 @@ ${d.conclusie || "_Nog niet ingevuld._"}
       },
       { key: "besluiten", label: "Benodigde besluiten van stuurgroep", type: "textarea", placeholder: "Één per regel." },
     ],
+    voorbeeld: {
+      projectnaam: "Migratie klantportaal naar nieuw platform",
+      opdrachtgever: "Directie Klantenservice",
+      projectmanager: "Linda de Cuba",
+      periode: "week 37, 2026",
+      datum: "2026-09-11",
+      statusPlanning: "Licht vertraagd",
+      statusBudget: "Binnen budget",
+      statusScope: "Ongewijzigd",
+      voortgang: "Technische migratie van de eerste twee klantsegmenten is afgerond en getest. Gebruikersacceptatietest is gestart met een vertraging van drie dagen door beschikbaarheid van testgebruikers.",
+      planning: "Afronden acceptatietest, starten met migratie resterende klantsegmenten, voorbereiden communicatie richting eindgebruikers.",
+      risicos: [
+        { risico: "Vertraging leveringen door leverancier", kans: "Gemiddeld", impact: "Hoog", beheersmaatregel: "Wekelijkse afstemming met leverancier" },
+        { risico: "Onvoldoende testcapaciteit bij klant", kans: "Hoog", impact: "Gemiddeld", beheersmaatregel: "Extra testers ingepland vanaf week 38" },
+      ],
+      besluiten: "Akkoord op verschuiven opleverdatum met één week\nGoedkeuring extra testbudget voor externe testers",
+    },
     render(d) {
       return `# Projectstatusrapportage — ${d.projectnaam || "[project]"}
 
@@ -231,6 +269,20 @@ ${lijstNaarMarkdown((d.besluiten || "").split("\n").filter(Boolean))}
       { key: "knelpunten", label: "Knelpunten / blockers", type: "textarea" },
       { key: "roadmap", label: "Vooruitblik roadmap", type: "textarea", placeholder: "Wat staat er op de planning voor de komende periode?" },
     ],
+    voorbeeld: {
+      productnaam: "Mijn Klantomgeving (app)",
+      productowner: "Linda de Cuba",
+      sprint: "Sprint 24 (9 - 20 sept)",
+      datum: "2026-09-20",
+      hoogtepunten: "Nieuwe zoekfilters live gezet en eerste versie van gepersonaliseerde meldingen opgeleverd aan een testgroep van 500 gebruikers.",
+      features: [
+        { feature: "Nieuwe zoekfilters", status: "Live", impact: "Snellere navigatie voor eindgebruikers" },
+        { feature: "Gepersonaliseerde meldingen (bèta)", status: "In test", impact: "Verwacht hogere betrokkenheid" },
+      ],
+      gebruikersfeedback: "NPS steeg van 32 naar 38. Supportvragen over zoekfunctie daalden met 18% ten opzichte van vorige sprint.",
+      knelpunten: "Bèta-groep meldt vertraging bij het laden van meldingen op oudere Android-toestellen.",
+      roadmap: "Oplossen prestatieprobleem meldingen, volledige uitrol meldingen naar alle gebruikers, start onderzoek naar verbeterde onboarding.",
+    },
     render(d) {
       return `# Sprint- en productupdate — ${d.productnaam || "[product]"}
 
@@ -293,6 +345,21 @@ ${d.roadmap || "_Nog niet ingevuld._"}
       { key: "architectuurwijzigingen", label: "Architectuurwijzigingen / beslissingen", type: "textarea" },
       { key: "vooruitblik", label: "Vooruitblik komende periode", type: "textarea" },
     ],
+    voorbeeld: {
+      team: "Platform Squad",
+      techlead: "Linda de Cuba",
+      periode: "augustus - september 2026",
+      datum: "2026-09-11",
+      samenvatting: "Systemen draaiden overwegend stabiel. Eén productie-incident met impact op de betaalflow is afgehandeld en geanalyseerd. Er is gestart met het terugdringen van technische schuld in de authenticatiemodule.",
+      systemen: [
+        { systeem: "API gateway", uptime: "99,95%", status: "Stabiel" },
+        { systeem: "Betaalservice", uptime: "99,80%", status: "Aandachtspunt" },
+      ],
+      incidenten: "12-08-2026: storing betaalservice door misconfiguratie load balancer, opgelost binnen 3u40m. Postmortem uitgevoerd, actie: alerting op configuratiewijzigingen toegevoegd.",
+      technischeSchuld: "Authenticatiemodule maakt nog gebruik van verouderde library; migratie is gestart en loopt door in Q4. Risico op kwetsbaarheden neemt af naarmate migratie vordert.",
+      architectuurwijzigingen: "Besloten om betaalservice te ontkoppelen van de gedeelde database om cascaderende storingen te voorkomen. Implementatie gepland voor volgende kwartaal.",
+      vooruitblik: "Afronden eerste fase authenticatiemigratie, starten met ontkoppeling betaalservice, verhogen testdekking op kritieke flows.",
+    },
     render(d) {
       return `# Technische statusrapportage — ${d.team || "[team]"}
 
